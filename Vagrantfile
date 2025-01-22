@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
         end
         
 
-        # Provisioning with shell script to replace /etc/bashrc
+        # Provisioning with shell script to replace /etc/bashrc for custom prompt
         controller.vm.provision "shell", inline: <<-SHELL
           cp /vagrant-rhce-lab/bashrc /etc/bashrc
           chown root:root /etc/bashrc
@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
           vb.memory = 2048 # 2 GB of RAM
         end
 
-        # Provisioning with shell script to replace /etc/bashrc
+        # Provisioning with shell script to replace /etc/bashrc for custom prompt
         server.vm.provision "shell", inline: <<-SHELL
           cp /vagrant-rhce-lab/bashrc /etc/bashrc
           chown root:root /etc/bashrc
