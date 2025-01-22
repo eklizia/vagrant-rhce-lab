@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
         # Provisioning with shell script to replace /etc/bashrc
         controller.vm.provision "shell", inline: <<-SHELL
-          cp /vagrant/bashrc /etc/bashrc
+          cp /vagrant-rhce-lab/bashrc /etc/bashrc
           chown root:root /etc/bashrc
           chmod 644 /etc/bashrc
           source /etc/bashrc
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
 
         # Provisioning with shell script to replace /etc/bashrc
         server.vm.provision "shell", inline: <<-SHELL
-          cp /vagrant/bashrc /etc/bashrc
+          cp /vagrant-rhce-lab/bashrc /etc/bashrc
           chown root:root /etc/bashrc
           chmod 644 /etc/bashrc
           source /etc/bashrc
