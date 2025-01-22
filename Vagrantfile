@@ -2,16 +2,16 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  # Define servers dynamically
+  # Define servers dynamically - Feel free to change the "4" depending how many nodes you want to manage.
   (0..4).each do |i|
     if i == 0
       config.vm.define "controller" do |controller|
         controller.vm.box = "generic/rhel9"
         controller.vm.hostname = "controller.example.com"
-        controller.vm.network "public_network", type: "dhcp"
+        controller.vm.network "private_network", type: "dhcp" # use public_network to get same subnet as your LAN  
         controller.vm.synced_folder ".", "/vagrant-rhce-lab"
 
-        # Set custom CPU and memory sizes for controller
+        # Set custom CPU and memory sizes for controller -feel free to modify as long as your system can handle.
         controller.vm.provider "virtualbox" do |vb|
           vb.cpus = 4      # 4 processors
           vb.memory = 4096 # 4 GB of RAM
@@ -30,10 +30,10 @@ Vagrant.configure("2") do |config|
       config.vm.define "server#{i}" do |server|
         server.vm.box = "generic/rhel9"
         server.vm.hostname = "server#{i}.example.com"
-        server.vm.network "public_network", type: "dhcp"
+        server.vm.network "private_network", type: "dhcp"  # use public_network to get same subnet as your LAN
         server.vm.synced_folder ".", "/vagrant-rhce-lab"
 
-        # Set default CPU and memory sizes for other servers
+        # Set default CPU and memory sizes for other servers- you customize according to your own resource.
         server.vm.provider "virtualbox" do |vb|
           vb.cpus = 2      # 2 processors
           vb.memory = 2048 # 2 GB of RAM
