@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
       config.vm.define "controller" do |controller|
         controller.vm.box = "generic/rhel9"
         controller.vm.hostname = "controller.example.com"
-        controller.vm.network "public_network", ip: "192.168.15.50", bridge: "enp4s0"
+        controller.vm.network "public_network", type: "dhcp"
         controller.vm.synced_folder ".", "/vagrant-rhce-lab"
 
         # Set custom CPU and memory sizes for controller
@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
       config.vm.define "server#{i}" do |server|
         server.vm.box = "generic/rhel9"
         server.vm.hostname = "server#{i}.example.com"
-        server.vm.network "public_network", ip: "192.168.15.5#{i}", bridge: "enp4s0"
+        server.vm.network "public_network", type: "dhcp"
         server.vm.synced_folder ".", "/vagrant-rhce-lab"
 
         # Set default CPU and memory sizes for other servers
