@@ -41,7 +41,15 @@ if [ -z "$BASHRCSOURCED" ]; then
     # Turn on checkwinsize
     shopt -s checkwinsize
 #    [ "$PS1" = "\\s-\\v\\\$ " ] && PS1="[\u@\h \W]\\$ "
-    PS1="\[\e[01;30m\]┌———\[\e[01;33m\][\[\e[m\]\[\e[01;35m\]\u\[\e[m\]\[\e[01;30m\]@\[\e[m\]\[\e[03;01;06;31m\]\h\[\e[0m\]\[\e[1;30m\]:\[\e[0m\]\[\e[01;36m\]\w\[\e[m\]\[\e[01;33m\]]\[\e[0m\]\[\e[01;33m\]{\[\e[0m\]\[\e[3;33m\]\$(hostname -I | awk '{print \$2}')\[\e[0m\]\[\e[01;33m\]}\[\e[0m\]\[\e[01;30m\]\n└>\[\e[01;33m\]$ \[\e[0m\]"
+    if [[ $USER == "root" ]]; then
+           PS1="\[\e[01;30m\]┌———\[\e[01;33m\][\[\e[m\]\[\e[01;06;31m\]\u\[\e[m\]\[\e[01;30m\]@\[\e[m\]\[\e[03;01;38m\]\h\[\e[0m\]\[\e[1;30m\]:\[\e[0m\]\[\e[01;36m\]\w\[\e[m\]\[\e[01;33m\]]\[\e[0m\]\[\e[01;33m\]{\[\e[0m\]\[\e[3;33m\]\$(hostname -I | awk '{print \$2}')\[\e[0m\]\[\e[01;33m\]}\[\e[0m\]\[\e[01;30m\]\n└>\[\e[01;33m\]$ \[\e[0m\]"
+   elif [[ $USER == "ansible-user"  ]]; then
+	   PS1="\[\e[01;30m\]┌———\[\e[01;33m\][\[\e[m\]\[\e[01;32m\]\u\[\e[m\]\[\e[01;30m\]@\[\e[m\]\[\e[03;01;38m\]\h\[\e[0m\]\[\e[1;30m\]:\[\e[0m\]\[\e[01;36m\]\w\[\e[m\]\[\e[01;33m\]]\[\e[0m\]\[\e[01;33m\]{\[\e[0m\]\[\e[3;33m\]\$(hostname -I | awk '{print \$2}')\[\e[0m\]\[\e[01;33m\]}\[\e[0m\]\[\e[01;30m\]\n└>\[\e[01;33m\]$ \[\e[0m\]"
+   else
+           PS1="\[\e[01;30m\]┌———\[\e[01;33m\][\[\e[m\]\[\e[01;35m\]\u\[\e[m\]\[\e[01;30m\]@\[\e[m\]\[\e[03;01;38m\]\h\[\e[0m\]\[\e[1;30m\]:\[\e[0m\]\[\e[01;36m\]\w\[\e[m\]\[\e[01;33m\]]\[\e[0m\]\[\e[01;33m\]{\[\e[0m\]\[\e[3;33m\]\$(hostname -I | awk '{print \$2}')\[\e[0m\]\[\e[01;33m\]}\[\e[0m\]\[\e[01;30m\]\n└>\[\e[01;33m\]$ \[\e[0m\]"
+    fi
+
+
     # You might want to have e.g. tty in prompt (e.g. more virtual machines)
     # and console windows
     # If you want to do so, just add e.g.
@@ -49,7 +57,7 @@ if [ -z "$BASHRCSOURCED" ]; then
     #   PS1="[\u@\h:\l \W]\\$ "
     # fi
     # to your custom modification shell script in /etc/profile.d/ directory
-  fi
+  
 
   if ! shopt -q login_shell ; then # We're not a login shell
     # Need to redefine pathmunge, it gets undefined at the end of /etc/profile
@@ -85,6 +93,12 @@ if [ -z "$BASHRCSOURCED" ]; then
     unset i
     unset -f pathmunge
   fi
-
+ fi
 fi
 # vim:ts=4:sw=4
+alias controller='ssh vagrant@controller'
+alias server1='ssh vagrant@server1'
+alias server2='ssh vagrant@server2'
+alias server3='ssh vagrant@server3'
+alias server4='ssh vagrant@server4'
+alias server5='ssh vagrant@server5'
